@@ -6,6 +6,11 @@ from machine import Pin
 from time import sleep
 
 builtinLed = Pin(25, Pin.OUT)
+
 builtinLed(1)
-sleep(1)
-builtinLed(0)
+
+for flashes in range(4):
+    red1(1)
+    sleep(0.5)
+    red1(0)
+    sleep(0.5)
