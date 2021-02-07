@@ -27,7 +27,7 @@ So machine.Pin would ne needed every time the code required a Pin to be initiali
 ```
 from machine import Pin
 from time import sleep
-``
+```
 
 Now the machine. can be dropped from the lines of code. Less typing, same result. As a further, I'd suggest unrecommended shortcut, the Pin and sleep could be shortened like this:
 
@@ -38,7 +38,7 @@ from time import sleep as s
 
 I wouldn't recommend this as the p and s really do not describe what they are for. Mathematicians use all manner of letters for various things. In software though it makes the code much easier to read if the names are descriptive. This following code would also work:
 
-'''
+```
 from machine import Pin as Pico_Pin_Number
 from time import sleep as Sleeping_Beauty_sleeps_after_biting_the_apple
 ```
