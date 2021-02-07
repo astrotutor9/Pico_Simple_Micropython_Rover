@@ -2,5 +2,10 @@
 # a Raspberry Pi Pico in MicroPython.
 
 # import two libraries to access the board and utilise timing
-import machine
-import time
+from machine import Pin
+from time import sleep
+
+builtinLed = Pin(25, Pin.OUT)
+builtinLed(1)
+sleep(1)
+builtinLed(0)
