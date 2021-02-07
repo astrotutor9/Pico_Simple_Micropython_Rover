@@ -143,3 +143,13 @@ for flashes in range(4):
 ```
 
 Try changing the sleep values to make the flashes shorter or longer. Change the switching around to create other patterns. Adjust the value of range to make the loop longer if need be.
+
+##Ready for Some Wheel Action
+The time has come to add the Pico to the rover. Instead of LED the connections shall be to the Motor Driver Board. The Pico must not be connected directly to any motor. The current draw from the motors is too much. The driverboard switches a more powerful current from commands from the Pico. Keeping the Pico safe.
+
+The connections for the LED are now swapped for connections with the Motor Driver Board. Each connection has a different affect. Each motor has three wires. When the wires are switched live in the correct combination the motor acts in five different ways. The table below should help with this.
+
+|Header | Header | Header |
+| ------|--------|--------|
+|Line One |Line Two | Line Three |
+|Line One |Line Two | Line Three |
