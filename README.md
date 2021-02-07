@@ -69,7 +69,7 @@ builtin(0)
 
 Press the green arrow button and watch the small LED on the Pico flash on for a second. Just press the arrow again to repeat.
 
-##Adding External LED
+## Adding External LED
 The next step is to add an external LED. This will demonstrate control of an external device. If an LED can be lit up then a motor can be turned on. If a motor can be turned on then a rover can move. Simple steps lead to bigger things.
 
 Connect an LED to Pin GP22 following the diagram below. The short leg of the LED links to the resistor and ground, the long leg to GP22 pin of the Pico.
@@ -95,7 +95,7 @@ for flashes in range(4):
     sleep(0.5)
 ```
 
-##Add Some More LED
+## Add Some More LED
 The next step is to add five more LED. Ideally have three sets of colours as they will be paired later. The LED will represent the connections to the Motor Driver Board of your rover. By switching the LED, the commands will be the same as switching the motors on and off. The same as driving the rover forwards, backwards, left, right or stop. Build your board up as in the diagram. So that the wiring is simpler on the rover use one side of the board for each side of the rover.
 
 **ADD DIAGRAM WITH 6 LED**
@@ -144,9 +144,7 @@ for flashes in range(4):
 
 Try changing the sleep values to make the flashes shorter or longer. Change the switching around to create other patterns. Adjust the value of range to make the loop longer if need be.
 
-##Add Some More LED
-
-##Ready for Some Wheel Action
+## Ready for Some Wheel Action
 
 The time has come to add the Pico to the rover. Instead of LED the connections shall be to the Motor Driver Board. The Pico must not be connected directly to any motor. The current draw from the motors is too much. The driverboard switches a more powerful current from commands from the Pico. Keeping the Pico safe.
 
