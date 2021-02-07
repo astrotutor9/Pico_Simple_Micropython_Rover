@@ -69,7 +69,7 @@ builtin(0)
 
 Press the green arrow button and watch the small LED on the Pico flash on for a second. Just press the arrow again to repeat.
 
-##Adding External LED
+## Adding External LED
 The next step is to add an external LED. This will demonstrate control of an external device. If an LED can be lit up then a motor can be turned on. If a motor can be turned on then a rover can move. Simple steps lead to bigger things.
 
 Connect an LED to Pin GP22 following the diagram below. The short leg of the LED links to the resistor and ground, the long leg to GP22 pin of the Pico.
@@ -85,7 +85,8 @@ from time import sleep
 builtinLed = Pin(25, Pin.OUT)
 red1 = Pin(22, Pin.OUT)
 
-builtinLed(1)  # Keep on just to show the Pico is powered
+# Simple indication to show Pico is powered and script is running
+builtinLed(1)
 
 for flashes in range(4):
     red1(1)
@@ -93,3 +94,142 @@ for flashes in range(4):
     red1(0)
     sleep(0.5)
 ```
+
+## Add Some More LED
+The next step is to add five more LED. Ideally have three sets of colours as they will be paired later. The LED will represent the connections to the Motor Driver Board of your rover. By switching the LED, the commands will be the same as switching the motors on and off. The same as driving the rover forwards, backwards, left, right or stop. Build your board up as in the diagram. So that the wiring is simpler on the rover use one side of the board for each side of the rover.
+
+**ADD DIAGRAM WITH 6 LED**
+
+The LED names have been changed to indicate the side they are on and the colour. The code for the six led to roll through a dual pattern of flashes is this:
+
+```
+# A simple coding exercise to build a two wheeled rover using
+# a Raspberry Pi Pico in MicroPython.
+
+# import two libraries to access the board and utilise timing
+from machine import Pin
+from time import sleep
+
+# Simple indication to show Pico is powered and script is running
+builtinLed = Pin(25, Pin.OUT) 
+
+redL = Pin(22,Pin.OUT)
+redR = Pin(9, Pin.OUT)
+
+greenL = Pin(21, Pin.OUT)
+greenR = Pin(10, Pin.OUT)
+
+blueL = Pin(20, Pin.OUT)
+blueR = Pin(11, Pin.OUT)
+
+# Simple indication to show Pico is powered and script is running
+builtinLed(1)
+
+for flashes in range(4):
+    redL(1)
+    redR(1)
+    sleep(0.5)
+    redL(0)
+    redR(0)
+    greenL(1)
+    greenR(1)
+    sleep(0.5)
+    greenL(0)
+    greenR(0)
+    blueL(1)
+    blueR(1)
+    sleep(0.5)
+    blueL(0)
+    blueR(0)
+```
+
+Try changing the sleep values to make the flashes shorter or longer. Change the switching around to create other patterns. Adjust the value of range to make the loop longer if need be.
+
+## Ready for Some Wheel Action
+
+The time has come to add the Pico to the rover. Instead of LED the connections shall be to the Motor Driver Board. The Pico must not be connected directly to any motor. The current draw from the motors is too much. The driverboard switches a more powerful current from commands from the Pico. Keeping the Pico safe.
+
+The connections for the LED are now swapped for connections with the Motor Driver Board. Each connection has a different affect. Each motor has three wires. When the wires are switched live in the correct combination the motor acts in five different ways. The table below should help with this.
+
+| Enable | Forward | Reverse | Result |
+| -------|---------|---------|--------|
+| Off | Off | Off | Stop |
+| On | On | Off | Forwards |
+| On | Off | On | Backwards |
+| On | On | On | Fast Stop |
+| On | Off | Off | Fast Stop |
+
+The Enable is really the on/off switch to the motors. If Enable is powered then the motors are on and something could happen. Without turning the motors on the rover will go nowhere. The difference between Stop and Fast Stop is subtle. If you need to stop your rover quickly, to stop in driving into a wall maybe, then Fast Stop is better.
+
+A motor direction is just the direction of that one motor. The rover has two motors. Both need to be turning forwards to make the whole rover move forwards. Otherwise it would just turn on the spot. And if the motors are turning in opposite directions it can spin on the spot. Once you have full control, how you drive it is up to you!
+
+To drive the motors successfully requires three instructions to each motor. Six in total for each manoeuvre, which will soon add up to a lot of lines of code! To simply matters and to reuse code as much as possible it is better to place each switching into a function.
+
+Functions are defined at the top of the script before they are needed to be used. Their format follows this pattern:
+
+```
+def functionName():
+    # here goes the code to work
+```
+
+And functions can call other functions into use. So a function for the rover to go forwards will can two functions for each motor to go forwards. So the code to make the rover to go forward could now start to look like this.
+
+# A simple coding exercise to build a two wheeled rover using
+# a Raspberry Pi Pico in MicroPython.
+
+# import two libraries to access the board and utilise timing
+from machine import Pin
+from time import sleep
+
+# Simple indication to show Pico is powered and script is running
+builtinLed = Pin(25, Pin.OUT)
+
+enable_L = Pin(22,Pin.OUT)
+enable_R = Pin(9, Pin.OUT)
+
+forward_L = Pin(21, Pin.OUT)
+forward_R = Pin(10, Pin.OUT)
+
+reverse_L = Pin(20, Pin.OUT)
+reverse_R = Pin(11, Pin.OUT)
+
+# Simple indication to show Pico is powered and script is running
+builtinLed(1)
+
+# define left motor going forwards
+def left_forwards():
+    enable_L(1)
+    forward_L(1)
+    reverse_L(0)
+
+# define right motor going forwards
+def right_forwards():
+    enable_R(1)
+    forward_R(1)
+    reverse_R(0)
+
+# define left motor to stop
+def left_stop():
+    enable_L(1)
+    forward_L(0)
+    reverse_L(0)
+
+# define right motor to stop
+def right_stop():
+    enable_R(1)
+    forward_R(0)
+    reverse_R(0)
+
+# define both motors to go forwards
+def rover_forwards():
+    left_forwards()
+    right_forwards()
+
+# define both motors to stop
+def rover_stop():
+    left_stop()
+    right_stop()
+    
+rover_forwards()  # go forwards
+sleep(5)          # for 5 seconds
+rover_stop()      # then stop
