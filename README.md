@@ -85,7 +85,8 @@ from time import sleep
 builtinLed = Pin(25, Pin.OUT)
 red1 = Pin(22, Pin.OUT)
 
-builtinLed(1)  # Keep on just to show the Pico is powered
+# Simple indication to show Pico is powered and script is running
+builtinLed(1)
 
 for flashes in range(4):
     red1(1)
@@ -93,3 +94,52 @@ for flashes in range(4):
     red1(0)
     sleep(0.5)
 ```
+
+##Add Some More LED
+The next step is to add five more LED. Ideally have three sets of colours as they will be paired later. The LED will represent the connections to the Motor Driver Board of your rover. By switching the LED, the commands will be the same as switching the motors on and off. The same as driving the rover forwards, backwards, left, right or stop. Build your board up as in the diagram. So that the wiring is simpler on the rover use one side of the board for each side of the rover.
+
+**ADD DIAGRAM WITH 6 LED**
+
+The LED names have been changed to indicate the side they are on and the colour. The code for the six led to roll through a dual pattern of flashes is this:
+
+```
+# A simple coding exercise to build a two wheeled rover using
+# a Raspberry Pi Pico in MicroPython.
+
+# import two libraries to access the board and utilise timing
+from machine import Pin
+from time import sleep
+
+# Simple indication to show Pico is powered and script is running
+builtinLed = Pin(25, Pin.OUT) 
+
+redL = Pin(22,Pin.OUT)
+redR = Pin(9, Pin.OUT)
+
+greenL = Pin(21, Pin.OUT)
+greenR = Pin(10, Pin.OUT)
+
+blueL = Pin(20, Pin.OUT)
+blueR = Pin(11, Pin.OUT)
+
+builtinLed(1)
+
+for flashes in range(4):
+    redL(1)
+    redR(1)
+    sleep(0.5)
+    redL(0)
+    redR(0)
+    greenL(1)
+    greenR(1)
+    sleep(0.5)
+    greenL(0)
+    greenR(0)
+    blueL(1)
+    blueR(1)
+    sleep(0.5)
+    blueL(0)
+    blueR(0)
+```
+
+Try changing the sleep values to make the flashes shorter or longer. Change the switching around to create other patterns. Adjust the value of range to make the loop longer if need be.
