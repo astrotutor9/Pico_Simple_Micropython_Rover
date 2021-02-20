@@ -172,8 +172,9 @@ def functionName():
     # here goes the code to work
 ```
 
-And functions can call other functions into use. So a function for the rover to go forwards will can two functions for each motor to go forwards. So the code to make the rover to go forward could now start to look like this.
+And functions can call other functions into use. So a function for the rover to go forwards can have two functions for each motor to go forwards. So the code to make the rover to go forward could now start to look like this.
 
+```
 # A simple coding exercise to build a two wheeled rover using
 # a Raspberry Pi Pico in MicroPython.
 
@@ -196,31 +197,31 @@ reverse_R = Pin(11, Pin.OUT)
 # Simple indication to show Pico is powered and script is running
 builtinLed(1)
 
-# define left motor going forwards
+# define only the left motor to go forwards
 def left_forwards():
     enable_L(1)
     forward_L(1)
     reverse_L(0)
 
-# define right motor going forwards
+# define only the right motor to go forwards
 def right_forwards():
     enable_R(1)
     forward_R(1)
     reverse_R(0)
 
-# define left motor to stop
+# define only the left motor to stop
 def left_stop():
     enable_L(1)
     forward_L(0)
     reverse_L(0)
 
-# define right motor to stop
+# define only the right motor to stop
 def right_stop():
     enable_R(1)
     forward_R(0)
     reverse_R(0)
 
-# define both motors to go forwards
+# define rover going forwards using both motors forwards
 def rover_forwards():
     left_forwards()
     right_forwards()
@@ -233,3 +234,6 @@ def rover_stop():
 rover_forwards()  # go forwards
 sleep(5)          # for 5 seconds
 rover_stop()      # then stop
+```
+
+With the LED still connected they will flash in the correct order to simulate the rover's motors switching on and off. The Raspberry Pi Pico can now be installed onto your rover and the LED connections changed to those of the motor driver board.
