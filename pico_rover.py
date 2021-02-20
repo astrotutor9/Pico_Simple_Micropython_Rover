@@ -17,8 +17,7 @@ forward_R = Pin(10, Pin.OUT)
 reverse_L = Pin(20, Pin.OUT)
 reverse_R = Pin(11, Pin.OUT)
 
-# Simple indication to show Pico is powered and script is running
-builtinLed(1)
+
 
 # define left motor going forwards
 def left_forwards():
@@ -55,5 +54,8 @@ def rover_stop():
     right_stop()
     
 rover_forwards()  # go forwards
+# Simple indication to show Pico is powered and script is running
+builtinLed(1)
 sleep(5)          # for 5 seconds
 rover_stop()      # then stop
+builtinLed(0)
