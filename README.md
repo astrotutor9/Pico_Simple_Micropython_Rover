@@ -4,39 +4,44 @@
 ## Introduction
 This is to simply demonstrate utilising the Raspberry Pi Pico pins to control LED and then a rover. Each step will build on the previous giving a result as the code builds up. Take it as far as you like and learn a little along the way. Then when you have completed this take it further!
 
-This will use a Pico, two 400 pin breadboards (though a single 800 will obviously work), LED of various colours, resisters and a button. The rover is a very simple two motor, two wheeled one off eBay with a 4 AA battery box and a Motor Driver Board.
+This will use a Pico, two 400 pin breadboards (though a single 800 will obviously work), LED of various colours, resisters and a button. The rover is a very simple two motor, two wheeled one off eBay (Item #143935395134) with a 4 AA battery box and a L298N Dual H Bridge Motor Driver Board 9Item #161887122068) added. The CamJam Edukit 3 will also be a great starting point too.
+
+The Raspberry Pi documentation for the Pico board describes how to get started. I will not repeat what they have already published. I suggest some reading of these to get started if the initial parts of this description are too brief.
+
+[Getting Started with the Raspberrry Pi Pico](https://www.raspberrypi.org/documentation/pico/getting-started/)
+[Getting Started with Micropython on the Raspberry Pi Pico](https://hackspace.raspberrypi.org/books/micropython-pico)
 
 ## Initial Code
-Open Thonny with a new blank file. On the very bottom right of Thonny click on the text. Select **MicroPython Raspberry Pi Pico**. Select the text again which now should read **Micropython(Raspberry Pi Pico)** and select **Configure Interpreter** at the bottom of the pop up. Then select **Install or update firmware**. Connect your Pico holding down the BootSel button. Ignore the pop folder of the Pico and click Install on the update screen. Close the windows and then as the Thonny editor suggests press Stop button. The MicroPython >>> tab should now show.
+Open Thonny with a new blank file. On the very bottom right of Thonny click on the text. Select **MicroPython Raspberry Pi Pico**. Select the text again which now should read **Micropython(Raspberry Pi Pico)** and select **Configure Interpreter** at the bottom of the pop up. Then select **Install or update firmware**. Connect your Pico whilst holding down the BootSel button. Ignore the pop folder of the Pico and click Install on the update screen. Close the windows and then as the Thonny editor suggests press Stop button. The MicroPython >>> tab should now show in the Shell in the bottom window.
 
-In the blank file window add the following code:
+In the blank file editor window (the top window) add the following code:
 
 ```
 import machine
 import time
 ```
 
-These two lines will enable you to utilise these libraries. To make use of the parts of them needed you need to call the library into use like this:
+These two lines will enable you to utilise these libraries of code. To make use of the parts you need of them you need to call the library into use like this:
 
 ```
 builtinLed = machine.Pin(25)
 ```
 
-So machine.Pin would ne needed every time the code required a Pin to be initialised. To circumvent the use of the machine part every time change the two lines of code to:
+So machine.Pin would be needed every time the code required a Pin to be initialised. To circumvent the use of the machine part every time change the two lines of code to:
 
 ```
 from machine import Pin
 from time import sleep
 ```
 
-Now the machine. can be dropped from the lines of code. Less typing, same result. As a further, I'd suggest unrecommended shortcut, the Pin and sleep could be shortened like this:
+Now the machine. can be dropped from the lines of code. Less typing, same result. Further to this, I'd suggest an unrecommended shortcut, the Pin and sleep could be shortened like this:
 
 ```
 from machine import Pin as p
 from time import sleep as s
 ```
 
-I wouldn't recommend this as the p and s really do not describe what they are for. Mathematicians use all manner of letters for various things. In software though it makes the code much easier to read if the names are descriptive. This following code would also work:
+I wouldn't recommend this as the p and s really do not describe what they are for. Mathematicians use all manner of letters in place of various things. In software though it makes the code much easier to read if the names are descriptive. This following code would also work:
 
 ```
 from machine import Pin as Pico_Pin_Number
