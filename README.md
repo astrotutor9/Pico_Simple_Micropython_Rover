@@ -95,7 +95,9 @@ Connect an LED to Pin GP22 following the diagram below. The short leg of the LED
 
 ![Pico with a single Led on a breadboard](Pico_Robot_one_Led.png)
 
-The code now needs to have the new LED added to it. This time there is a small piece repeat using a for loop. The flashes could be anything you like. Blinks, twinkle, toggle, Fido, it doesn't matter. Just choose a wod that means something to you and the code. The range is how many from zero to 4 but not including four. 0, 1, 2, 3 so still four times. Computers count from zero not one. Try changing the (4) to (1,4). This time the range is from one to four. But it doesn't include four so the count is just 1, 2, 3.
+The code now needs be changed to have the new LED added to it. This time there is a small piece of code using a for loop to repeat the commands a number of times. The word flashes could be anything you like. Blinks, twinkle, toggle, Fido, it doesn't matter. Just choose a word that means something to you and the code. The range is how many from zero to 4 but not including four. 0, 1, 2, 3 so still four times. Computers count from zero not one. Try changing the (4) to (1,4). This time the range is from one to four. But it doesn't include four, the count is just 1, 2, 3.
+
+The new LED has been labelled red1 (that's red one) because later there will be a second red LED. It could, of course, be called redOne, or red_one. I hope you are getting the idea about making sensible labelling.
 
 ```
 from machine import Pin
@@ -114,10 +116,12 @@ for flashes in range(4):
     sleep(0.5)
 ```
 
-## Add Some More LED
-The next step is to add five more LED. Ideally have three sets of colours as they will be paired later. The LED will represent the connections to the Motor Driver Board of your rover. By switching the LED, the commands will be the same as switching the motors on and off. The same as driving the rover forwards, backwards, left, right or stop. Build your board up as in the diagram. So that the wiring is simpler on the rover use one side of the board for each side of the rover.
+Run the code. This time the built in LED will just light up and the external LED will flash four times. Make it flash more times by changing the range value. ALter the sleep value as well to change the flash rate.
 
-**ADD DIAGRAM WITH 6 LED**
+## Add Some More LED
+The next step is to add five more LED. Ideally have three sets of colours as they will be paired later. The LED will represent the connections to the Motor Driver Board of your rover. By switching the LED, the commands will be the same as switching the motors on and off. The same as driving the rover forwards, backwards, left, right or stop. Build your board up as in the diagram. So that the wiring is simpler on the rover use one side of the board for each side of the rover. I used two small boards because that is what I had available. The wires in the middle are just to join them together.
+
+![Pico with six Led on a breadboard](Pico_Robot_Six_Led.png)
 
 The LED names have been changed to indicate the side they are on and the colour. The code for the six led to roll through a dual pattern of flashes is this:
 
