@@ -73,6 +73,9 @@ In physical computing making an LED flash is the Hello World moment. This proves
 This is the complete code do not rewrite the first two lines again.
 
 ```
+# A simple coding exercise to build a two wheeled rover using
+# a Raspberry Pi Pico in MicroPython
+
 from machine import Pin
 from time import sleep
 
@@ -80,10 +83,10 @@ from time import sleep
 # It is Pin.OUT because power is going out of the board pin to the Led to light it
 builtinLed = Pin(25, Pin.OUT)
 
-# turn on LED for one second, then off
-builtinLed(1)
-sleep(1)
-builtinLed(0)
+
+builtinLed(1) # turn on (1) the LED
+sleep(1)      # pause for (1) second
+builtinLed(0) # turn off (0) the LED
 ```
 
 Press the green arrow button on Thonny and watch the small LED on the Pico flash on for a second. Just press the arrow again to repeat. If there are any errors in the code a message will show in the Shell window. 
@@ -97,22 +100,27 @@ Connect an LED to Pin GP22 following the diagram below. The short leg of the LED
 
 The code now needs be changed to have the new LED added to it. This time there is a small piece of code using a for loop to repeat the commands a number of times. The word flashes could be anything you like. Blinks, twinkle, toggle, Fido, it doesn't matter. Just choose a word that means something to you and the code. The range is how many from zero to 4 but not including four. 0, 1, 2, 3 so still four times. Computers count from zero not one. Try changing the (4) to (1,4). This time the range is from one to four. But it doesn't include four, the count is just 1, 2, 3.
 
-The new LED has been labelled red1 (that's red one) because later there will be a second red LED. It could, of course, be called redOne, or red_one. I hope you are getting the idea about making sensible labelling.
+Also note that the code after the for line is indented in by a tab or four spaces. If the colon : at the end of the line is not ommitted then Thonny should indent automatically for you.
+
+The new LED has been labelled red because that was the colour of the first LED I put in the board. It could, of course, have been green or blue. I hope you are getting the idea about making sensible labelling.
 
 ```
+# A simple coding exercise to build a two wheeled rover using
+# a Raspberry Pi Pico in MicroPython
+
 from machine import Pin
 from time import sleep
 
 builtinLed = Pin(25, Pin.OUT)
-red1 = Pin(22, Pin.OUT)
+red = Pin(22, Pin.OUT)
 
 # Simple indication to show Pico is powered and script is running
 builtinLed(1)
 
 for flashes in range(4):
-    red1(1)
+    red(1)
     sleep(0.5)
-    red1(0)
+    red(0)
     sleep(0.5)
 ```
 
@@ -123,17 +131,16 @@ The next step is to add five more LED. Ideally have three sets of colours as the
 
 ![Pico with six Led on a breadboard](Pico_Robot_Six_Led.png)
 
-The LED names have been changed to indicate the side they are on and the colour. The code for the six led to roll through a dual pattern of flashes is this:
+The LED names have been changed to indicate the side of the rover they will power and the colour. The code for the six LED to roll through a dual pattern of flashes is this:
 
 ```
 # A simple coding exercise to build a two wheeled rover using
-# a Raspberry Pi Pico in MicroPython.
+# a Raspberry Pi Pico in MicroPython
 
 # import two libraries to access the board and utilise timing
 from machine import Pin
 from time import sleep
 
-# Simple indication to show Pico is powered and script is running
 builtinLed = Pin(25, Pin.OUT) 
 
 redL = Pin(22,Pin.OUT)
@@ -170,9 +177,9 @@ Try changing the sleep values to make the flashes shorter or longer. Change the 
 
 ## Ready for Some Wheel Action
 
-The time has come to add the Pico to the rover. Instead of LED the connections shall be to the Motor Driver Board. The Pico must not be connected directly to any motor. The current draw from the motors is too much. The driverboard switches a more powerful current from commands from the Pico. Keeping the Pico safe.
+The time has come to add the Pico to the rover. Instead of LED the connections shall be to the Motor Driver Board. The Pico must not be connected directly to any motor. The current draw from the motors is too much for the board to deal with. The driverboard switches a more powerful current from commands from the Pico. Keeping the Pico safe.
 
-The connections for the LED are now swapped for connections with the Motor Driver Board. Each connection has a different affect. Each motor has three wires. When the wires are switched live in the correct combination the motor acts in five different ways. The table below should help with this.
+The connections for the LED are now swapped for connections with the Motor Driver Board. Each connection has a different effect. Each motor has three wires. When the wires are switched live in the correct combination the motor acts in five different ways. The table below should help with this.
 
 | Enable | Forward | Reverse | Result |
 | -------|---------|---------|--------|
@@ -182,20 +189,20 @@ The connections for the LED are now swapped for connections with the Motor Drive
 | On | On | On | Fast Stop |
 | On | Off | Off | Fast Stop |
 
-The Enable is really the on/off switch to the motors. If Enable is powered then the motors are on and something could happen. Without turning the motors on the rover will go nowhere. The difference between Stop and Fast Stop is subtle. If you need to stop your rover quickly, to stop in driving into a wall maybe, then Fast Stop is better.
+The Enable is really the on/off switch to the motors. If Enable is powered then the motors are on and something could happen. Without turning the motors on the rover will go nowhere. The difference between Stop and Fast Stop is subtle. If you need to stop your rover quickly, to stop driving into a wall maybe, then Fast Stop is better.
 
 A motor direction is just the direction of that one motor. The rover has two motors. Both need to be turning forwards to make the whole rover move forwards. Otherwise it would just turn on the spot. And if the motors are turning in opposite directions it can spin on the spot. Once you have full control, how you drive it is up to you!
 
-To drive the motors successfully requires three instructions to each motor. Six in total for each manoeuvre, which will soon add up to a lot of lines of code! To simply matters and to reuse code as much as possible it is better to place each switching into a function.
+To drive the motors successfully requires three instructions to each motor. Six in total for each manoeuvre, which will soon add up to a lot of lines of code! To simplyfy matters and to reuse code as much as possible it is better to place each switching into a function.
 
-Functions are defined at the top of the script before they are needed to be used. Their format follows this pattern:
+Functions are defined at the top of the script before they are needed to be used. There are two important points here to take note of. The colon : at the end of the line indicates the beginning of the functions code. Any line after that indented in by a tab or four spaces will be part of that function. Just like the for code previously. The pattern of a function is this:
 
 ```
 def functionName():
     # here goes the code to work
 ```
 
-And functions can call other functions into use. So a function for the rover to go forwards can have two functions for each motor to go forwards. So the code to make the rover to go forward could now start to look like this.
+And functions can call other functions into use. So a function for the rover to go forwards can have two functions for each motor to go forwards. So the code to make the rover to go forward could now start to look like this. The Pico is stil set up with the LED at this point.
 
 ```
 # A simple coding exercise to build a two wheeled rover using
@@ -205,7 +212,6 @@ And functions can call other functions into use. So a function for the rover to 
 from machine import Pin
 from time import sleep
 
-# Simple indication to show Pico is powered and script is running
 builtinLed = Pin(25, Pin.OUT)
 
 enable_L = Pin(22,Pin.OUT)
@@ -259,4 +265,6 @@ sleep(5)          # for 5 seconds
 rover_stop()      # then stop
 ```
 
-With the LED still connected they will flash in the correct order to simulate the rover's motors switching on and off. The Raspberry Pi Pico can now be installed onto your rover and the LED connections changed to those of the motor driver board.
+With the LED still connected they will flash in the correct order to simulate the rover's motors switching on and off. The Raspberry Pi Pico can now be installed onto your rover and the LED connections connected to those of the motor driver board.
+
+
