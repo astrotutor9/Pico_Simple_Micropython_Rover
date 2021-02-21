@@ -9,6 +9,7 @@ This will use a Pico, two 400 pin breadboards (though a single 800 will obviousl
 The Raspberry Pi documentation for the Pico board describes how to get started. I will not repeat what they have already published. I suggest some reading of these to get started if the initial parts of this description are too brief.
 
 [Getting Started with the Raspberrry Pi Pico](https://www.raspberrypi.org/documentation/pico/getting-started/)
+
 [Getting Started with Micropython on the Raspberry Pi Pico](https://hackspace.raspberrypi.org/books/micropython-pico)
 
 ## Initial Code
