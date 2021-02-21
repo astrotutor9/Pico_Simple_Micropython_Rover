@@ -68,21 +68,25 @@ from time import sleep
 Now is the time to save the code. Always good to save regulary. Go to File then Save and from the pop-up select **This Computer**. Name your file something like **pico_rover.py** in your folder place of choice. There is no need to save the file to the Pico board yet. The code will run on the board without saving to it. Only when we disconnect the board later from the computer to run on the rover will you have to save onto the Pico. For now it is probably safer to keep it on the hard drive. This is just a recommendation not a rule.
 
 ## Make Something Happen
-In physical comuting making an LED flash is the Hello World moment. This proves we have control. Add the extra lines to your code.
+In physical computing making an LED flash is the Hello World moment. This proves we have control. Add the extra lines to your code. I have also added a comment to the code here. Comments are prefaced with a #. Anything on the same line after the # is not code, just a message to the human reader. Copy the comments if you wish but adding comments to code is good practice.
+
+This is the complete code do not rewrite the first two lines again.
 
 ```
-from machine import LED
+from machine import Pin
 from time import sleep
 
+# Here the internal Led attached to Pin 25 is set to be called builtinLed
+# It is Pin.OUT because power is going out of the board pin to the Led to light it
 builtinLed = Pin(25, Pin.OUT)
 
 # turn on LED for one second, then off
 builtinLed(1)
 sleep(1)
-builtin(0)
+builtinLed(0)
 ```
 
-Press the green arrow button and watch the small LED on the Pico flash on for a second. Just press the arrow again to repeat.
+Press the green arrow button on Thonny and watch the small LED on the Pico flash on for a second. Just press the arrow again to repeat. If there are any errors in the code a message will show in the Shell window. 
 
 ## Adding External LED
 The next step is to add an external LED. This will demonstrate control of an external device. If an LED can be lit up then a motor can be turned on. If a motor can be turned on then a rover can move. Simple steps lead to bigger things.
