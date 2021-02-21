@@ -93,7 +93,7 @@ The next step is to add an external LED. This will demonstrate control of an ext
 
 Connect an LED to Pin GP22 following the diagram below. The short leg of the LED links to the resistor and ground, the long leg to GP22 pin of the Pico.
 
-!(Pico_Robot_one_Led.png)
+!(/Pico_Robot_one_Led.png)
 
 The code now needs to have the new LED added to it. This time there is a small piece repeat using a for loop. The flashes could be anything you like. Blinks, twinkle, toggle, Fido, it doesn't matter. Just choose a wod that means something to you and the code. The range is how many from zero to 4 but not including four. 0, 1, 2, 3 so still four times. Computers count from zero not one. Try changing the (4) to (1,4). This time the range is from one to four. But it doesn't include four so the count is just 1, 2, 3.
 
