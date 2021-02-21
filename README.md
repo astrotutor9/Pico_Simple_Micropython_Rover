@@ -4,7 +4,15 @@
 ## Introduction
 This is to simply demonstrate utilising the Raspberry Pi Pico pins to control LED and then a rover. Each step will build on the previous giving a result as the code builds up. Take it as far as you like and learn a little along the way. Then when you have completed this take it further!
 
-This will use a Pico, two 400 pin breadboards (though a single 800 will obviously work), LED of various colours, resisters and a button. The rover is a very simple two motor, two wheeled one off eBay (Item #143935395134) with a 4 AA battery box and a L298N Dual H Bridge Motor Driver Board 9Item #161887122068) added. The CamJam Edukit 3 will also be a great starting point too.
+This will use:
+* Pico
+* Two 400 pin breadboards (though a single 800 will obviously work)
+* LED of various colours, 330 ohm resisters
+* a button. 
+* The rover is a very simple two motor, two wheeled one off eBay (Item #143935395134) with a 4 AA battery box
+* L298N Dual H Bridge Motor Driver Board (Item #161887122068)
+
+Or the [CamJam Edukit 3](https://thepihut.com/products/camjam-edukit-3-robotics) will also be a great starting point too.
 
 The Raspberry Pi documentation for the Pico board describes how to get started. I will not repeat what they have already published. I suggest some reading of these to get started if the initial parts of this description are too brief.
 
