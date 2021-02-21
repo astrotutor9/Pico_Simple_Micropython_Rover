@@ -7,7 +7,8 @@ This is to simply demonstrate utilising the Raspberry Pi Pico pins to control LE
 This will use:
 * Pico
 * Two 400 pin breadboards (though a single 800 will obviously work)
-* LED of various colours, 330 ohm resisters
+* LED of various colours
+* 330 ohm resisters
 * a button. 
 * The rover is a very simple two motor, two wheeled one off eBay (Item #143935395134) with a 4 AA battery box
 * L298N Dual H Bridge Motor Driver Board (Item #161887122068)
