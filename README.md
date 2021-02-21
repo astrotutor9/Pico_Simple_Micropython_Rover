@@ -267,4 +267,5 @@ rover_stop()      # then stop
 
 With the LED still connected they will flash in the correct order to simulate the rover's motors switching on and off. The Raspberry Pi Pico can now be installed onto your rover and the LED connections connected to those of the motor driver board.
 
+![Pico Rover connections with motor driver board](Pico_Robot_motors.png)
 
