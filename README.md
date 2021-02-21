@@ -267,5 +267,8 @@ rover_stop()      # then stop
 
 With the LED still connected they will flash in the correct order to simulate the rover's motors switching on and off. The Raspberry Pi Pico can now be installed onto your rover and the LED connections connected to those of the motor driver board.
 
+When the code is run and the motors seem to rotate in the opposite direction to that expected - swap the motor connections around.
+
 ![Pico Rover connections with motor driver board](Pico_Robot_motors.png)
 
+** 
