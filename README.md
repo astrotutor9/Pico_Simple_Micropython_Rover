@@ -382,7 +382,11 @@ Change the sequence of commands to drive around in the pattern of your own desig
 ## Random Driving Robot
 Developing the Python learning further with the use of random and lists it is possible to make the rover drive around by itself. By adding a button and importing the random module the rover can produce a series of movements on its own.
 
-Add the button to the breadboard.
+Add the button to the breadboard connecting it to Pin 14 of the Pico. Add this line to the other pin definitions at the top of the code.
+
+```
+button = Pin(14, Pin.IN)
+```
 
 ![Pico Rover connections with button added](Pico_Robot_Button.png)
 
