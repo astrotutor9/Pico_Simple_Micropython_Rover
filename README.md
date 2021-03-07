@@ -539,10 +539,10 @@ def move_rover(moves):
 
 while True:
     if button.value() == 1:
-        builtinLed(1)
+        builtinLed(0)
         for moves in range(10):
             movement = randint(1,4)
             move_rover(movement)
             sleep(2)
-        builtinLed(0)
+        builtinLed(1)
 ```
