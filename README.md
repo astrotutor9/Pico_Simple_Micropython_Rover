@@ -413,7 +413,7 @@ This function is different from others because it is receiving a value from the 
 
 If the moves value is a 3 then the first if check is false. So is the elif 2. But the elif 3 is True so the right_turn function is called. If the value is a 4 then all the if and elif are False so the catch all else is used and the rover turns left. With if/elif/else commands any checks after the first line that passes True are ignored even if they may pass as True. But when if/if/if/else are used instead each if is checked in turn. Subtly different.
 
-The commands this time will be enclosed in a forever while loop. This will run for as long as the power is supplied to the Pico. Inside the loop the code checks to see if the button is pressed. If it has been pressed then the code generates a series of random numbers sending the number to the above function to drive the rover.
+The commands this time will be enclosed in a forever while loop. This will run for as long as the power is supplied to the Pico. Inside the loop the code checks to see if the button is pressed. If it has been pressed then the code generates a series of random numbers sending the number to the above function to drive the rover. 
 
 ```
 while True:
@@ -461,6 +461,9 @@ reverse_L = Pin(20, Pin.OUT)
 reverse_R = Pin(11, Pin.OUT)
 
 button = Pin(14, Pin.IN)
+
+# Simple indication to show Pico is powered and script is running
+builtinLed(1)
 
 # define left motor going forwards
 def left_forwards():
@@ -536,6 +539,9 @@ def move_rover(moves):
         left_turn()
         sleep(0.6)
     rover_stop()
+    
+# Simple indication to show Pico is powered and script is running
+builtinLed(1)
 
 while True:
     if button.value() == 1:
