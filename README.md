@@ -7,9 +7,9 @@
 3. **Make Something Happen** (flash internal LED)
 4. **Adding External LED** (breadboards and flash external LED
 5. **Add Some More LED** (set up 6 LED as if rover connections)
-6. **Ready for Some Wheel Action** (disconnect LED, connect the motors and python functions)
+6. **Ready for Some Wheel Action** (disconnect LED, connect the motors and Python functions)
 7. **Time for Some More Action** (really take control)
-8. **Random Driving Robot** (hand over the control, python if/elif/else, while and random numbers)
+8. **Random Driving Robot** (hand over the control, Python if/elif/else, while and random numbers)
 
 ## Introduction
 This is to simply demonstrate utilising the Raspberry Pi Pico pins to control LED and then a rover. Each step will build on the previous giving a result as the code builds up. Take it as far as you like and learn a little along the way. Then when you have completed this take it further!
@@ -389,7 +389,7 @@ IMAGE NEEDED
 The rover will now be set up so that when the button is pressed a series of 4 random numbers will be generated. Each number refers to either one of the four possible rover moves. A new function selects which motor function is called depending on which random number is generated. Place this function at the bottom of the previous ones. (Or the top or middle, it doesn't really matter to Python).
 
 ```
-def move(moves):
+def move_rover(moves):
     if moves == 1:
         rover_forwards()
         sleep(1)
@@ -409,3 +409,136 @@ This function is different from others because it is receiving a value from the 
 
 If the moves value is a 3 then the first if check is false. So is the elif 2. But the elif 3 is True so the right_turn function is called. If the value is a 4 then all the if and elif are False so the catch all else is used and the rover turns left. With if/elif/else commands any checks after the first line that passes True are ignored even if they may pass as True. But when if/if/if/else are used instead each if is checked in turn. Subtly different.
 
+The commands this time will be enclosed in a forever while loop. This will run for as long as the power is supplied to the Pico. Inside the loop the code checks to see if the button is pressed. If it has been pressed then the code generates a series of random numbers sending the number to the above function to drive the rover.
+
+```
+while True:
+    if button.value() == 1:
+        builtinLed(0)  # indicates the button has pressed and this part of the code is running
+        for moves in range(10):
+            movement = randint(1,4)
+            move_rover(movement)
+            sleep(2)
+        builtinLed(1)  # indicates the loop has finished and the button is ready to be pressed again
+```
+
+The loop works like this:
+1. The loop runs forever because while is True. It will never be False as it states it is True. While this is True do what follows.
+2. The button.value can be either zero if not pressed or one if pressed. So if the value is one then this line is True and the following lines run. If not then the while loop loops around and checks again, and again...
+3. The builtin LED is switched off to indicate to the user that the code is running.
+4. A series of numbers from 0 to 9 are generated in a loop. The code does not use them but it provides a way of repeating something a defined number of times.
+5. A number, either 1, 2, 3 ror 4 is generated and set to the variable movement.
+6. The move_rover function is called and the value of movement generated in the previous line sent with the call.
+7. A pause to allow the drive or turn to operate before getting the next move.
+8. Once 10 moves have run the loop terminates and the builtin LED illuminates.
+
+So now you have the complete code, repeated below. Save it to the Raspberry Pi Pico as main.py again. Plug in the powerbank and press the button. Have fun!
+
+```
+# A simple coding exercise to build a two wheeled rover using
+# a Raspberry Pi Pico in MicroPython.
+
+# import two libraries to access the board and utilise timing
+from machine import Pin
+from time import sleep
+from random import randint
+
+
+# Set up definitions of pins being used
+builtinLed = Pin(25, Pin.OUT)
+
+enable_L = Pin(22,Pin.OUT)
+enable_R = Pin(9, Pin.OUT)
+
+forward_L = Pin(21, Pin.OUT)
+forward_R = Pin(10, Pin.OUT)
+
+reverse_L = Pin(20, Pin.OUT)
+reverse_R = Pin(11, Pin.OUT)
+
+button = Pin(14, Pin.IN)
+
+# define left motor going forwards
+def left_forwards():
+    enable_L(1)
+    forward_L(1)
+    reverse_L(0)
+    
+# define left motor going backwards
+def left_reverse():
+    enable_L(1)
+    forward_L(0)
+    reverse_L(1)
+
+# define right motor going forwards
+def right_forwards():
+    enable_R(1)
+    forward_R(1)
+    reverse_R(0)
+    
+    # define right motor going backwards
+def right_reverse():
+    enable_R(1)
+    forward_R(0)
+    reverse_R(1)
+
+# define left motor to stop
+def left_stop():
+    enable_L(1)
+    forward_L(0)
+    reverse_L(0)
+
+# define right motor to stop
+def right_stop():
+    enable_R(1)
+    forward_R(0)
+    reverse_R(0)
+
+# define both motors to go forwards
+def rover_forwards():
+    left_forwards()
+    right_forwards()
+    
+def rover_reverse():
+    left_reverse()
+    right_reverse()
+
+# define both motors to stop
+def rover_stop():
+    left_stop()
+    right_stop()
+
+# define a right turn
+def right_turn():
+    left_forwards()
+    right_reverse()
+
+# define a left turn
+def left_turn():
+    left_reverse()
+    right_forwards()
+    
+def move_rover(moves):
+    if moves == 1:
+        rover_forwards()
+        sleep(1)
+    elif moves == 2:
+        rover_reverse()
+        sleep(1)
+    elif moves == 3:
+        right_turn()
+        sleep(0.6)
+    elif moves == 4:
+        left_turn()
+        sleep(0.6)
+    rover_stop()
+
+while True:
+    if button.value() == 1:
+        builtinLed(1)
+        for moves in range(10):
+            movement = randint(1,4)
+            move_rover(movement)
+            sleep(2)
+        builtinLed(0)
+```
