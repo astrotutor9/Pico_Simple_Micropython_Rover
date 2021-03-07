@@ -1,5 +1,15 @@
 # Pico_Simple_Micropython_Rover
  Tutorial on creating a MicroPython rover using the Raspberry Pi Pico.
+ 
+## Chapters
+1. Introduction 
+2. Initial Code (Python imports)
+3. Make Something Happen (flash internal LED)
+4. Adding External LED (breadboards and flash external LED
+5. Add Some More LED (set up 6 LED as if rover connections)
+6. Ready for Some Wheel Action (disconnect LED, connect the motors and python functions)
+7. Time for Some More Action (really take control)
+8. Random Driving Robot (hand over the control, python if/elif/else, while and random numbers)
 
 ## Introduction
 This is to simply demonstrate utilising the Raspberry Pi Pico pins to control LED and then a rover. Each step will build on the previous giving a result as the code builds up. Take it as far as you like and learn a little along the way. Then when you have completed this take it further!
@@ -272,7 +282,7 @@ When the code is run and the motors seem to rotate in the opposite direction to 
 
 ![Pico Rover connections with motor driver board](Pico_Robot_motors.png)
 
-** Time for Some More Action
+## Time for Some More Action
 All the basic commands are now available to control the rover. Extra functions for reversing the wheels are required to make your rover go backwards and to turn. These are created just by copying the previous functions and swapping the commands around. All the functions needed are these. Add those **not there already** to your code.
 
 ```
@@ -369,5 +379,33 @@ This can be tested on the desk but it would be much more fun on the floor. Save 
 
 Change the sequence of commands to drive around in the pattern of your own design.
 
-** Random Driving Robot
-Developing the Python learning further with the use of random and lists it is possible to make the rover drive around by itself. By adding a button the rover can produce a series of random movements.
+## Random Driving Robot
+Developing the Python learning further with the use of random and lists it is possible to make the rover drive around by itself. By adding a button and importing the random module the rover can produce a series of movements on its own.
+
+Add the button to the breadboard.
+
+IMAGE NEEDED
+
+The rover will now be set up so that when the button is pressed a series of 4 random numbers will be generated. Each number refers to either one of the four possible rover moves. A new function selects which motor function is called depending on which random number is generated. Place this function at the bottom of the previous ones. (Or the top or middle, it doesn't really matter to Python).
+
+```
+def move(moves):
+    if moves == 1:
+        rover_forwards()
+        sleep(1)
+    elif moves == 2:
+        rover_reverse()
+        sleep(1)
+    elif moves == 3:
+        right_turn()
+        sleep(0.6)
+    else:
+        left_turn()
+        sleep(0.6)
+    rover_stop()
+```
+
+This function is different from others because it is receiving a value from the call. This value (or argument) is then used within the function. The value will be assigned the variable name of moves and will be either 1, 2, 3 or 4. If the value is 1 then the function calls the rover_forwards function to operate then pauses (sleeps) for a second. As the value was a 1 then the next three elif (else if) lines are ignored. The final line calls the function rover_stop to work. So the rover has move forwards for a second and then stopped.
+
+If the moves value is a 3 then the first if check is false. So is the elif 2. But the elif 3 is True so the right_turn function is called. If the value is a 4 then all the if and elif are False so the catch all else is used and the rover turns left. With if/elif/else commands any checks after the first line that passes True are ignored even if they may pass as True. But when if/if/if/else are used instead each if is checked in turn. Subtly different.
+
