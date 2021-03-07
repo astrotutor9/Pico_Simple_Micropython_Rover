@@ -195,7 +195,7 @@ A motor direction is just the direction of that one motor. The rover has two mot
 
 To drive the motors successfully requires three instructions to each motor. Six in total for each manoeuvre, which will soon add up to a lot of lines of code! To simplyfy matters and to reuse code as much as possible it is better to place each switching into a function.
 
-Functions are defined at the top of the script before they are needed to be used. There are two important points here to take note of. The colon : at the end of the line indicates the beginning of the functions code. Any line after that indented in by a tab or four spaces will be part of that function. Just like the for code previously. The pattern of a function is this:
+Functions are defined at the top of the script before they are needed to be used. The name of a function is up to the you but make it relevant to its function. There are two important points here to take note of. The colon : at the end of the line indicates the beginning of the function's code. Any line after that indented in by a tab or four spaces will be part of that function until the first line that is not indented in. Just like the for code previously for the 'for - range' line. The pattern of a basic function is this:
 
 ```
 def functionName():
@@ -259,7 +259,8 @@ def rover_forwards():
 def rover_stop():
     left_stop()
     right_stop()
-    
+
+# Calls to the functions to make the rover actually move
 rover_forwards()  # go forwards
 sleep(5)          # for 5 seconds
 rover_stop()      # then stop
@@ -315,7 +316,8 @@ def right_stop():
 def rover_forwards():
     left_forwards()
     right_forwards()
-    
+
+# define both motors to go in reverse
 def rover_reverse():
     left_reverse()
     right_reverse()
