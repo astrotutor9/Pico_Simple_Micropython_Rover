@@ -368,3 +368,6 @@ rover_stop()
 This can be tested on the desk but it would be much more fun on the floor. Save the file to the Pico this time with Save As and select the Pico and **rename it as main.py**. Only files named main.py will run when the Pico is powered away from a computer. Power the Pico with a small phone powerbank, the AA batteries will still power the motor. You should now have a rover that will drive around.
 
 Change the sequence of commands to drive around in the pattern of your own design.
+
+** Random Driving Robot
+Developing the Python learning further with the use of random and lists it is possible to make the rover drive around by itself. By adding a button the rover can produce a series of random movements.
