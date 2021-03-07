@@ -2,14 +2,14 @@
  Tutorial on creating a MicroPython rover using the Raspberry Pi Pico.
  
 ## Chapters
-1. Introduction 
-2. Initial Code (Python imports)
-3. Make Something Happen (flash internal LED)
-4. Adding External LED (breadboards and flash external LED
-5. Add Some More LED (set up 6 LED as if rover connections)
-6. Ready for Some Wheel Action (disconnect LED, connect the motors and python functions)
-7. Time for Some More Action (really take control)
-8. Random Driving Robot (hand over the control, python if/elif/else, while and random numbers)
+1. **Introduction** 
+2. **Initial Code** (Python imports)
+3. **Make Something Happen** (flash internal LED)
+4. **Adding External LED** (breadboards and flash external LED
+5. **Add Some More LED** (set up 6 LED as if rover connections)
+6. **Ready for Some Wheel Action** (disconnect LED, connect the motors and python functions)
+7. **Time for Some More Action** (really take control)
+8. **Random Driving Robot** (hand over the control, python if/elif/else, while and random numbers)
 
 ## Introduction
 This is to simply demonstrate utilising the Raspberry Pi Pico pins to control LED and then a rover. Each step will build on the previous giving a result as the code builds up. Take it as far as you like and learn a little along the way. Then when you have completed this take it further!
