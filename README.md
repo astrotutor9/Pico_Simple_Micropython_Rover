@@ -11,7 +11,7 @@
 7. **Time for Some More Action** (really take control)
 8. **Random Driving Robot** (hand over the control, Python if/elif/else, while and random numbers)
 
-![Raspberry Pi Pico rover](Pico_Rover.png)
+![Raspberry Pi Pico rover](Pico_Rover.jpg)
 
 ## Introduction
 This is to simply demonstrate utilising the Raspberry Pi Pico pins to control LED and then a rover. Each step will build on the previous giving a result as the code builds up. Take it as far as you like and learn a little along the way. Then when you have completed this take it further!
