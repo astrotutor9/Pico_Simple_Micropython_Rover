@@ -202,7 +202,7 @@ def functionName():
     # here goes the code to work
 ```
 
-And functions can call other functions into use. So a function for the rover to go forwards can have two functions for each motor to go forwards. So the code to make the rover to go forward could now start to look like this. The Pico is stil set up with the LED at this point.
+And functions can call other functions into use. So a function for the rover to go forwards can have two functions for each motor to go forwards. So the code to make the rover to go forward could now start to look like this. The Pico is still set up with the LED at this point.
 
 ```
 # A simple coding exercise to build a two wheeled rover using
@@ -265,10 +265,104 @@ sleep(5)          # for 5 seconds
 rover_stop()      # then stop
 ```
 
-With the LED still connected they will flash in the correct order to simulate the rover's motors switching on and off. The Raspberry Pi Pico can now be installed onto your rover and the LED connections connected to those of the motor driver board.
+With the LED still connected they will flash in the correct order to simulate the rover's motors switching on and off. The Raspberry Pi Pico can now be installed onto your rover and the LED connections connected to those of the motor driver board. To test it works **support the rover off the desk** otherwise it will drive off onto the floor as soon as the code is run.
 
 When the code is run and the motors seem to rotate in the opposite direction to that expected - swap the motor connections around.
 
 ![Pico Rover connections with motor driver board](Pico_Robot_motors.png)
 
-** 
+** Time for Some More Action
+All the basic commands are now available to control the rover. Extra functions for reversing the wheels are required to make your rover go backwards and to turn. These are created just by copying the previous functions and swapping the commands around. All the functions needed are these. Add those **not there already** to your code.
+
+```
+# define left motor going forwards
+def left_forwards():
+    enable_L(1)
+    forward_L(1)
+    reverse_L(0)
+    
+# define left motor going backwards
+def left_reverse():
+    enable_L(1)
+    forward_L(0)
+    reverse_L(1)
+
+# define right motor going forwards
+def right_forwards():
+    enable_R(1)
+    forward_R(1)
+    reverse_R(0)
+    
+    # define right motor going backwards
+def right_reverse():
+    enable_R(1)
+    forward_R(0)
+    reverse_R(1)
+
+# define left motor to stop
+def left_stop():
+    enable_L(1)
+    forward_L(0)
+    reverse_L(0)
+
+# define right motor to stop
+def right_stop():
+    enable_R(1)
+    forward_R(0)
+    reverse_R(0)
+
+# define both motors to go forwards
+def rover_forwards():
+    left_forwards()
+    right_forwards()
+    
+def rover_reverse():
+    left_reverse()
+    right_reverse()
+
+# define both motors to stop
+def rover_stop():
+    left_stop()
+    right_stop()
+
+# define a right turn
+def right_turn():
+    left_forwards()
+    right_reverse()
+
+# define a left turn
+def left_turn():
+    left_reverse()
+    right_forwards()
+```
+
+All that is left is to write a series of commands for the rover to follow. A zig zag kind of drive could be this:
+
+```
+sleep(5)      # a short pause after powering up before the motor starts
+rover_forwards()
+sleep(2)
+rover_stop()
+sleep(0.5)
+right_turn()   # the sleep time here is for the turn
+sleep(0.5)     # the amount will vary from my rover to yours
+rover_stop()
+sleep(0.5)
+rover_forwards()
+sleep(2)
+left_turn()
+sleep(0.5)
+rover_stop()
+rover_forwards()
+sleep(2)
+rover_stop()
+right_turn()
+sleep(1)
+rover_reverse()
+sleep(2)
+rover_stop()
+```
+
+This can be tested on the desk but it would be much more fun on the floor. Save the file to the Pico this time with Save As and select the Pico and **rename it as main.py**. Only files named main.py will run when the Pico is powered away from a computer. Power the Pico with a small phone powerbank, the AA batteries will still power the motor. You should now have a rover that will drive around.
+
+Change the sequence of commands to drive around in the pattern of your own design.
