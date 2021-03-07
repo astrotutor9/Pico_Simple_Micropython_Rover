@@ -1,6 +1,8 @@
 # Pico_Simple_Micropython_Rover
  Tutorial on creating a MicroPython rover using the Raspberry Pi Pico.
  
+ See the rover in a [short video on YouTube from here] (https://youtu.be/rmi_szheksw).
+ 
 ## Chapters
 1. **Introduction** 
 2. **Initial Code** (Python imports)
