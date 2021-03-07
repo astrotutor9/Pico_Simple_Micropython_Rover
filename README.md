@@ -384,7 +384,7 @@ Developing the Python learning further with the use of random and lists it is po
 
 Add the button to the breadboard.
 
-IMAGE NEEDED
+![Pico Rover connections with button added](Pico_Robot_Button.png)
 
 The rover will now be set up so that when the button is pressed a series of 4 random numbers will be generated. Each number refers to either one of the four possible rover moves. A new function selects which motor function is called depending on which random number is generated. Place this function at the bottom of the previous ones. (Or the top or middle, it doesn't really matter to Python).
 
